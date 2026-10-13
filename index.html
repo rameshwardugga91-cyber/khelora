@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KHELORA — Where Athletes Rise | Sports Social Network</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{syne:['Syne','sans-serif'],jakarta:['"Plus Jakarta Sans"','sans-serif']},colors:{volt:'#C8FF2E',violetx:'#7C5CFF',coral:'#FF4D6D'}}}}
+</script>
+<style>
+:root{--bg:#060913;--bg2:#0A0F1F;--card:#0E1528;--card2:#121B33;--border:rgba(255,255,255,.09);--text:#F4F7FF;--muted:#94A3B8;--input:#0B1222}
+[data-theme="light"]{--bg:#EEF2F7;--bg2:#E6EBF5;--card:#FFFFFF;--card2:#F7F9FF;--border:rgba(15,23,42,.10);--text:#0F172A;--muted:#64748B;--input:#F1F5F9}
+*{-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;transition:.3s}
+.card{background:var(--card);border:1px solid var(--border)}
+.card2{background:var(--card2)}
+.muted{color:var(--muted)} .border-soft{border-color:var(--border)} .input-bg{background:var(--input)}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:#334155;border-radius:99px}::-webkit-scrollbar-track{background:transparent}
+.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{scrollbar-width:none}
+.grad{background:linear-gradient(92deg,#C8FF2E,#3EE6C4 45%,#7C5CFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.grad-bg{background:linear-gradient(92deg,#C8FF2E,#2DD4BF 50%,#7C5CFF)}
+.glow{box-shadow:0 10px 40px rgba(200,255,46,.18)}
+.post{animation:fadeUp .55s ease both}@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}.marquee{animation:marquee 28s linear infinite}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.45)}100%{transform:scale(1)}}.pop{animation:pop .35s ease}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.3}}.live-dot{animation:pulseDot 1.2s infinite}
+.athlete-card{transition:.3s}.athlete-card:hover{transform:translateY(-5px);border-color:rgba(200,255,46,.5);box-shadow:0 18px 35px rgba(0,0,0,.28)}
+.nav-item{transition:.2s}.nav-item:hover,.nav-item.active{background:rgba(200,255,46,.10);color:var(--text)}
+.chip{transition:.2s;white-space:nowrap}.chip.active{background:#C8FF2E;color:#0A0F02;border-color:#C8FF2E;font-weight:800}
+.story-ring{background:conic-gradient(from 180deg,#C8FF2E,#22D3EE,#7C5CFF,#FF4D6D,#C8FF2E);padding:3px;border-radius:999px}
+textarea:focus,input:focus,select:focus{outline:none}
+select option{color:#111}
+.poll-bar{transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.video-progress{animation:vid 8s linear forwards}@keyframes vid{from{width:0%}to{width:100%}}
+.modal{transition:.25s}.toast{animation:toastIn .3s ease both}@keyframes toastIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.drawer{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.shine{position:relative;overflow:hidden}.shine:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.22),transparent 70%);transform:translateX(-120%)}.shine:hover:after{transition:.7s;transform:translateX(120%)}
+</style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+<!-- LIVE TICKER -->
+<div class="fixed top-0 left-0 right-0 z-[60] bg-[#0A0F02] text-black h-[34px] overflow-hidden flex items-center" style="background:linear-gradient(90deg,#C8FF2E,#2DD4BF)">
+  <div class="flex items-center gap-2 px-3 font-extrabold text-[11px] tracking-widest shrink-0 bg-black text-[#C8FF2E] h-full z-10"><span class="w-2 h-2 bg-red-500 rounded-full live-dot"></span>LIVE</div>
+  <div class="overflow-hidden flex-1"><div class="marquee flex gap-10 whitespace-nowrap text-[12px] font-bold w-max">
+    <span>🏏 IND 287/4 (42.3) vs AUS • Kabir Singh 89*(54)</span><span>⚽ MUMBAI CITY 2 - 1 BENGALURU FC • 78'</span><span>🏃 National Athletics: Ananya clocks 11.38s in 100m Heat</span><span>🏏 RCB Women 164/6 vs MI • Meera takes 3 wickets</span><span>⚽ INDIA U19 Trials Shortlist Announced</span>
+    <span>🏏 IND 287/4 (42.3) vs AUS • Kabir Singh 89*(54)</span><span>⚽ MUMBAI CITY 2 - 1 BENGALURU FC • 78'</span><span>🏃 National Athletics: Ananya clocks 11.38s in 100m Heat</span><span>🏏 RCB Women 164/6 vs MI • Meera takes 3 wickets</span><span>⚽ INDIA U19 Trials Shortlist Announced</span>
+  </div></div>
+</div>
+
+<!-- MOBILE HEADER -->
+<header class="md:hidden sticky top-[34px] z-50 backdrop-blur-xl card border-x-0 border-t-0 px-4 py-3 flex items-center justify-between">
+  <div class="flex items-center gap-2"><div class="w-9 h-9 rounded-xl grad-bg grid place-items-center font-syne font-extrabold text-black text-xl">K</div><div><p class="font-syne font-extrabold leading-none text-[18px]">KHEL<span class="grad">ORA</span></p><p class="text-[10px] muted font-bold tracking-widest">KHELO • SHINE KARO</p></div></div>
+  <div class="flex items-center gap-2"><button onclick="toggleTheme()" class="w-9 h-9 rounded-full card grid place-items-center text-lg theme-icon">☀️</button><button onclick="showToast('🔔 3 new notifications: Trial shortlist, 12 likes, 1 coach message')" class="relative w-9 h-9 rounded-full card grid place-items-center">🔔<span class="absolute top-1 right-1 w-2.5 h-2.5 bg-[#FF4D6D] rounded-full border-2 border-white"></span></button><img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-9 h-9 rounded-full object-cover ring-2 ring-[#C8FF2E]"></div>
+</header>
+
+<div class="max-w-[1420px] mx-auto flex justify-center gap-5 px-0 md:px-4 pt-[34px] md:pt-[42px]">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="hidden md:flex flex-col w-[72px] xl:w-[272px] shrink-0 sticky top-[42px] h-[calc(100vh-50px)] py-4 px-2 xl:px-3">
+    <div class="flex items-center gap-3 px-2 cursor-pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <div class="w-11 h-11 rounded-2xl grad-bg grid place-items-center font-syne font-extrabold text-black text-2xl shadow-lg shrink-0">K</div>
+      <div class="hidden xl:block"><h1 class="font-syne font-extrabold text-[24px] leading-none tracking-tight">KHEL<span class="grad">ORA</span></h1><p class="text-[10px] muted font-extrabold tracking-[.22em] mt-1">WHERE ATHLETES RISE</p></div>
+    </div>
+
+    <nav class="mt-8 space-y-1 text-[15px] font-semibold muted">
+      <a href="#" class="nav-item active flex items-center gap-4 px-3 py-3 rounded-2xl"><span class="text-xl">🏠</span><span class="hidden xl:block">Home Feed</span><span class="hidden xl:block ml-auto bg-[#C8FF2E] text-black text-[10px] font-extrabold px-2 py-0.5 rounded-full">NEW</span></a>
+      <a href="#feedTop" class="nav-item flex items-center gap-4 px-3 py-3 rounded-2xl"><span class="text-xl">🔥</span><span class="hidden xl:block">Explore Highlights</span></a>
+      <a href="#trialsSection" class="nav-item flex items-center gap-4 px-3 py-3 rounded-2xl"><span class="text-xl">🏆</span><span class="hidden xl:block">Trials & Tournaments</span></a>
+      <a href="#athletesSection" class="nav-item flex items-center gap-4 px-3 py-3 rounded-2xl"><span class="text-xl">👥</span><span class="hidden xl:block">Athletes & Coaches</span></a>
+      <button onclick="showToast('💬 Messages: Coach Vikram sent you a training plan')" class="nav-item w-full flex items-center gap-4 px-3 py-3 rounded-2xl text-left"><span class="text-xl">✉️</span><span class="hidden xl:block">Messages</span><span class="hidden xl:flex ml-auto w-5 h-5 bg-[#FF4D6D] text-white text-[10px] rounded-full items-center justify-center font-bold">3</span></button>
+      <button onclick="filterBookmarks()" class="nav-item w-full flex items-center gap-4 px-3 py-3 rounded-2xl text-left"><span class="text-xl">🔖</span><span class="hidden xl:block">Bookmarks</span></button>
+      <button onclick="openProfile(0)" class="nav-item w-full flex items-center gap-4 px-3 py-3 rounded-2xl text-left"><span class="text-xl">👤</span><span class="hidden xl:block">My Profile</span></button>
+    </nav>
+
+    <button onclick="focusComposer()" class="shine mt-6 grad-bg text-black font-extrabold rounded-full py-3.5 px-4 text-[15px] glow hover:scale-[1.02] transition"><span class="xl:hidden text-xl">＋</span><span class="hidden xl:block">＋ Post Update</span></button>
+
+    <div class="mt-4 hidden xl:block rounded-[22px] p-[1px] bg-gradient-to-br from-[#C8FF2E] via-teal-400 to-violet-500"><div class="card rounded-[21px] p-4"><p class="text-[11px] font-extrabold tracking-widest text-[#C8FF2E]">⭐ PRO SCOUT</p><p class="font-bold text-sm mt-1 leading-snug">Get noticed by 240+ verified coaches & scouts.</p><button onclick="showToast('⭐ Khelora Pro: Your scout profile is now boosted for 7 days!')" class="mt-3 w-full bg-white text-black text-xs font-extrabold py-2.5 rounded-full">Boost Profile →</button></div></div>
+
+    <div class="mt-auto card rounded-2xl p-3 flex items-center gap-3 cursor-pointer hover:border-[#C8FF2E]/50 transition" onclick="openProfile(0)">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-11 h-11 rounded-full object-cover">
+      <div class="hidden xl:block min-w-0"><p class="font-bold text-sm truncate">Rohan Sharma <span class="text-sky-400">✔</span></p><p class="muted text-xs truncate">@rohan.cricket • All-Rounder</p></div><span class="hidden xl:block ml-auto muted">•••</span>
+    </div>
+    <button onclick="toggleTheme()" class="mt-3 card rounded-full py-2.5 text-sm font-bold flex items-center justify-center gap-2"><span class="theme-icon">☀️</span><span class="hidden xl:inline theme-label">Light Mode</span></button>
+  </aside>
+
+  <!-- CENTER FEED -->
+  <main class="flex-1 min-w-0 max-w-[700px] w-full pb-24 md:pb-10">
+    <!-- Desktop center header -->
+    <div class="hidden md:flex sticky top-[34px] z-40 backdrop-blur-xl card border-x-0 items-center justify-between px-5 py-3 rounded-b-[20px]">
+      <div><h2 class="font-syne font-extrabold text-xl">For You</h2><p class="muted text-xs">Personalised for Cricket • Football • Athletics</p></div>
+      <div class="flex bg-[var(--input)] rounded-full p-1 text-xs font-bold"><button id="tabForYou" onclick="setTab('foryou')" class="px-4 py-2 rounded-full bg-[#C8FF2E] text-black">For You</button><button id="tabFollowing" onclick="setTab('following')" class="px-4 py-2 rounded-full muted">Following</button><button id="tabHighlights" onclick="setTab('highlights')" class="px-4 py-2 rounded-full muted">Highlights</button></div>
+    </div>
+
+    <!-- STORIES -->
+    <section class="px-4 md:px-0 mt-4"><div class="flex gap-4 overflow-x-auto no-scrollbar pb-1" id="stories"></div></section>
+
+    <!-- COMPOSER -->
+    <section id="composer" class="card md:rounded-[24px] mt-3 p-4 md:p-5 border-x-0 md:border-x">
+      <div class="flex gap-3">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-11 h-11 rounded-full object-cover shrink-0 cursor-pointer" onclick="openProfile(0)">
+        <div class="flex-1 min-w-0">
+          <div class="flex gap-2 mb-2 overflow-x-auto no-scrollbar" id="composerSports">
+            <button data-sport="Cricket" class="c-sport chip active text-[11px] font-bold px-3 py-1.5 rounded-full border border-soft">🏏 Cricket</button>
+            <button data-sport="Football" class="c-sport chip text-[11px] font-bold px-3 py-1.5 rounded-full border border-soft muted">⚽ Football</button>
+            <button data-sport="Athletics" class="c-sport chip text-[11px] font-bold px-3 py-1.5 rounded-full border border-soft muted">🏃 Athletics</button>
+            <button data-sport="General" class="c-sport chip text-[11px] font-bold px-3 py-1.5 rounded-full border border-soft muted">💬 General</button>
+          </div>
+          <textarea id="postText" rows="3" maxlength="280" placeholder="Share your training, match update or highlight, Rohan... 🔥" class="w-full bg-transparent resize-none text-[15px] placeholder:text-slate-500 leading-relaxed"></textarea>
+          <div id="attachPreview" class="hidden relative rounded-2xl overflow-hidden mt-2"><img id="attachImg" class="w-full h-44 object-cover"><button onclick="removeAttach()" class="absolute top-2 right-2 bg-black/70 text-white w-7 h-7 rounded-full">✕</button><span class="absolute bottom-2 left-2 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded-full">📎 Highlight attached</span></div>
+          <div class="flex items-center justify-between mt-3 pt-3 border-t border-soft">
+            <div class="flex gap-1 text-lg"><button onclick="attachImage()" title="Add highlight" class="w-9 h-9 rounded-full hover:bg-[#C8FF2E]/15 grid place-items-center">🖼️</button><button onclick="showToast('🎥 Video upload: Highlight editor opening...')" class="w-9 h-9 rounded-full hover:bg-[#C8FF2E]/15 grid place-items-center">🎥</button><button onclick="showToast('📊 Poll creator added to your draft')" class="w-9 h-9 rounded-full hover:bg-[#C8FF2E]/15 grid place-items-center">📊</button><button onclick="showToast('📍 Location set: Wankhede Stadium, Mumbai')" class="w-9 h-9 rounded-full hover:bg-[#C8FF2E]/15 grid place-items-center">📍</button></div>
+            <div class="flex items-center gap-3"><span id="charCount" class="text-xs muted font-bold">280</span><div class="w-7 h-7 rounded-full border-2 border-soft grid place-items-center"><div id="charRing" class="w-full h-full rounded-full" style="background:conic-gradient(#C8FF2E 0%, transparent 0)"></div></div><button id="postBtn" onclick="createPost()" disabled class="bg-[#C8FF2E] disabled:opacity-40 text-black font-extrabold text-sm px-6 py-2.5 rounded-full hover:scale-105 transition">Post</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <div id="feedTop" class="flex gap-2 overflow-x-auto no-scrollbar px-4 md:px-0 mt-4 sticky top-[118px] md:top-[108px] z-30 py-1">
+      <button data-filter="All" class="f-chip chip active px-4 py-2 rounded-full border border-soft card text-sm font-bold">🌍 All Sports</button>
+      <button data-filter="Cricket" class="f-chip chip px-4 py-2 rounded-full border border-soft card text-sm font-bold muted">🏏 Cricket</button>
+      <button data-filter="Football" class="f-chip chip px-4 py-2 rounded-full border border-soft card text-sm font-bold muted">⚽ Football</button>
+      <button data-filter="Athletics" class="f-chip chip px-4 py-2 rounded-full border border-soft card text-sm font-bold muted">🏃 Athletics</button>
+      <button data-filter="Hockey" class="f-chip chip px-4 py-2 rounded-full border border-soft card text-sm font-bold muted">🏑 Hockey</button>
+      <button data-filter="Kabaddi" class="f-chip chip px-4 py-2 rounded-full border border-soft card text-sm font-bold muted">🤼 Kabaddi</button>
+    </div>
+
+    <!-- ATHLETE SPOTLIGHT -->
+    <section id="athletesSection" class="mt-5">
+      <div class="flex items-end justify-between px-4 md:px-0"><div><p class="text-[11px] font-extrabold tracking-[.2em] text-[#C8FF2E]">⭐ SPOTLIGHT</p><h3 class="font-syne font-extrabold text-xl mt-1">Rising Athletes to Follow</h3></div><button onclick="showToast('👥 Showing all 1,248 rising athletes near you')" class="text-xs font-bold text-[#C8FF2E]">View All →</button></div>
+      <div id="athleteScroll" class="flex gap-4 overflow-x-auto no-scrollbar px-4 md:px-0 mt-3 pb-2 snap-x"></div>
+    </section>
+
+    <!-- MOBILE TRIALS STRIP -->
+    <section class="xl:hidden mx-4 md:mx-0 mt-4 rounded-[22px] p-[1px] bg-gradient-to-r from-[#C8FF2E] to-violet-500 cursor-pointer" onclick="openTrialsDrawer()"><div class="card rounded-[21px] p-4 flex items-center gap-3"><span class="text-3xl">🏆</span><div class="flex-1"><p class="font-extrabold text-sm">12 Trials & Tournaments Near You</p><p class="muted text-xs">Mumbai FC U19 • BCCI Camp • Sprint Trials — Apply Now</p></div><span class="bg-[#C8FF2E] text-black text-xs font-extrabold px-3 py-2 rounded-full">View →</span></div></section>
+
+    <!-- FEED -->
+    <div id="feed" class="mt-4 space-y-4 px-0 md:px-0"></div>
+    <div id="emptyState" class="hidden card md:rounded-[24px] p-10 text-center mx-4 md:mx-0"><p class="text-4xl">🔍</p><h4 class="font-syne font-bold text-lg mt-2">No posts found</h4><p class="muted text-sm mt-1">Try another sport filter or search term.</p><button onclick="resetFilters()" class="mt-4 bg-[#C8FF2E] text-black text-sm font-extrabold px-5 py-2.5 rounded-full">Reset Filters</button></div>
+    <button onclick="loadMore()" class="w-[calc(100%-2rem)] md:w-full mx-4 md:mx-0 mt-5 card rounded-full py-3.5 font-bold text-sm hover:border-[#C8FF2E]/60 transition">Load More Highlights ↓</button>
+    <p class="text-center muted text-[11px] mt-6 px-4">KHELORA © 2026 • Made for India's next champions 🇮🇳 • Privacy • Terms • Coaches Verified</p>
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="hidden xl:block w-[360px] shrink-0 sticky top-[42px] h-[calc(100vh-50px)] overflow-y-auto no-scrollbar py-4 space-y-4">
+    <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 muted">🔍</span><input id="searchInput" placeholder="Search athletes, coaches, #trials..." class="w-full input-bg border border-soft rounded-full py-3 pl-11 pr-4 text-sm font-medium"></div>
+
+    <!-- TRIALS -->
+    <section id="trialsSection" class="card rounded-[24px] overflow-hidden">
+      <div class="p-4 bg-gradient-to-r from-[#C8FF2E]/20 via-teal-400/10 to-violet-500/20 flex items-center justify-between"><div><p class="text-[10px] font-extrabold tracking-widest text-[#C8FF2E]">📣 ANNOUNCEMENTS</p><h3 class="font-syne font-extrabold">Upcoming Trials & Tournaments</h3></div><span class="bg-[#FF4D6D] text-white text-[10px] font-extrabold px-2 py-1 rounded-full">12 LIVE</span></div>
+      <div id="trialsList" class="divide-y divide-[var(--border)]"></div>
+      <button onclick="showToast('🏆 All 48 trials loaded for Maharashtra, Delhi & Karnataka')" class="w-full py-3 text-xs font-extrabold text-[#C8FF2E]">View All Trials →</button>
+    </section>
+
+    <!-- TRENDING -->
+    <section class="card rounded-[24px] p-4">
+      <h3 class="font-syne font-extrabold">Trending in Sports 🔥</h3>
+      <div class="mt-3 space-y-3 text-sm">
+        <div class="flex justify-between cursor-pointer hover:opacity-80" onclick="quickSearch('MumbaiTrials')"><div><p class="muted text-xs">Cricket • Trending</p><p class="font-bold">#MumbaiTrials2026</p><p class="muted text-xs">24.5K posts</p></div><span class="muted">•••</span></div>
+        <div class="flex justify-between cursor-pointer hover:opacity-80" onclick="quickSearch('RoadToOlympics')"><div><p class="muted text-xs">Athletics • India</p><p class="font-bold">#RoadToOlympics</p><p class="muted text-xs">18.2K posts</p></div><span class="muted">•••</span></div>
+        <div class="flex justify-between cursor-pointer hover:opacity-80" onclick="quickSearch('ISL')"><div><p class="muted text-xs">Football • ISL</p><p class="font-bold">#ISLNextGen</p><p class="muted text-xs">12.8K posts</p></div><span class="muted">•••</span></div>
+      </div>
+    </section>
+
+    <!-- SUGGESTED -->
+    <section class="card rounded-[24px] p-4"><h3 class="font-syne font-extrabold">Coaches & Athletes For You</h3><div id="suggestedList" class="mt-3 space-y-4"></div></section>
+  </aside>
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 card border-b-0 border-x-0 px-2 py-2 flex justify-around items-center backdrop-blur-xl">
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="flex flex-col items-center text-[10px] font-bold text-[#C8FF2E]"><span class="text-xl">🏠</span>Home</button>
+  <button onclick="document.getElementById('searchMobile').focus();window.scrollTo({top:0,behavior:'smooth'})" class="flex flex-col items-center text-[10px] font-bold muted"><span class="text-xl">🔍</span>Explore</button>
+  <button onclick="focusComposer()" class="w-12 h-12 -mt-6 rounded-full grad-bg text-black text-2xl font-extrabold shadow-xl grid place-items-center border-4 border-[var(--bg)]">＋</button>
+  <button onclick="openTrialsDrawer()" class="flex flex-col items-center text-[10px] font-bold muted"><span class="text-xl">🏆</span>Trials</button>
+  <button onclick="openProfile(0)" class="flex flex-col items-center text-[10px] font-bold muted"><img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-6 h-6 rounded-full object-cover">Profile</button>
+</nav>
+<input id="searchMobile" class="sr-only" placeholder="search">
+
+<!-- TRIALS DRAWER (Mobile) -->
+<div id="trialsDrawer" class="fixed inset-0 z-[70] hidden"><div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeTrialsDrawer()"></div><div class="drawer absolute bottom-0 left-0 right-0 max-h-[86vh] overflow-y-auto card rounded-t-[28px] p-5 translate-y-full" id="drawerPanel"><div class="w-12 h-1.5 bg-slate-500/40 rounded-full mx-auto mb-4"></div><div class="flex justify-between items-center"><h3 class="font-syne font-extrabold text-xl">🏆 Trials & Tournaments</h3><button onclick="closeTrialsDrawer()" class="w-8 h-8 rounded-full card2">✕</button></div><div id="mobileTrialsList" class="mt-4 space-y-3"></div></div></div>
+
+<!-- PROFILE MODAL -->
+<div id="profileModal" class="fixed inset-0 z-[80] hidden items-center justify-center p-3"><div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeProfile()"></div><div class="modal relative card rounded-[28px] w-full max-w-[520px] max-h-[92vh] overflow-y-auto no-scrollbar scale-95 opacity-0" id="profileCard"></div></div>
+
+<!-- TOASTS -->
+<div id="toasts" class="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-[90] space-y-2 w-[calc(100%-2rem)] max-w-[420px]"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+let currentFilter='All', currentTab='foryou', selectedSport='Cricket', attached=false, followed=new Set(['kabir','coachvikram']), bookmarkOnly=false;
+
+const athletes=[
+{id:0,name:'Rohan Sharma',handle:'@rohan.cricket',avatar:'https://randomuser.me/api/portraits/men/32.jpg',cover:'https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1000&auto=format&fit=crop',sport:'Cricket',pos:'All-Rounder • Right-hand Bat',loc:'Mumbai, MH',verified:true,stats:[['Matches','86'],['Runs','2,840'],['Avg','48.9'],['Wickets','42']],bio:'State U-23 All-Rounder | Chasing the India cap 🇮🇳 | Trained at Shivaji Park Academy',followers:'12.4K'},
+{id:1,name:'Kabir Singh',handle:'@kabir.striker',avatar:'https://randomuser.me/api/portraits/men/22.jpg',cover:'https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1000&auto=format&fit=crop',sport:'Cricket',pos:'Opening Batsman',loc:'Delhi',verified:true,stats:[['Matches','48'],['Runs','1,842'],['Avg','47.2'],['SR','138.4']],bio:'Delhi Capitals Academy | 89* vs Australia A | Opening the innings, owning the powerplay.',followers:'28.1K'},
+{id:2,name:'Ananya Iyer',handle:'@ananya.sprints',avatar:'https://randomuser.me/api/portraits/women/44.jpg',cover:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1000&auto=format&fit=crop',sport:'Athletics',pos:'Sprinter • 100m / 200m',loc:'Bengaluru, KA',verified:true,stats:[['PB 100m','11.38s'],['Medals','14'],['Rank','IND #3'],['PB 200m','23.61s']],bio:'National Sprinter | Road to Olympics 2028 | Speed is my superpower ⚡',followers:'19.7K'},
+{id:3,name:'Arjun Malhotra',handle:'@arjun.no9',avatar:'https://randomuser.me/api/portraits/men/45.jpg',cover:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1000&auto=format&fit=crop',sport:'Football',pos:'Striker • Centre Forward',loc:'Kochi, KL',verified:true,stats:[['Matches','62'],['Goals','28'],['Assists','19'],['Rating','8.4']],bio:'Kerala Blasters U-21 Striker | Left foot, big dreams | #ISLNextGen',followers:'15.3K'},
+{id:4,name:'Meera Joshi',handle:'@meera.pace',avatar:'https://randomuser.me/api/portraits/women/68.jpg',cover:'https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1000&auto=format&fit=crop',sport:'Cricket',pos:'Fast Bowler • Right-arm',loc:'Pune, MH',verified:false,stats:[['Matches','39'],['Wickets','67'],['Best','5/18'],['Econ','4.2']],bio:'Pace bowler swinging it both ways | Maharashtra Women’s Team',followers:'9.8K'},
+{id:5,name:'Coach Vikram Rao',handle:'@coachvikram',avatar:'https://randomuser.me/api/portraits/men/67.jpg',cover:'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1000&auto=format&fit=crop',sport:'Athletics',pos:'Head Coach • Sprints',loc:'Delhi',verified:true,stats:[['Athletes','120+'],['Medals','86'],['Exp','18 Yrs'],['Olympians','6']],bio:'SAI Certified Head Coach | Built 6 Olympians | DM for sprint trials & coaching.',followers:'42K'},
+];
+
+const trials=[
+{id:1,sport:'Football',color:'#22C55E',icon:'⚽',title:'Mumbai City FC U-19 Trials',org:'Mumbai City FC Academy',date:'28',month:'JUN',loc:'Cooperage Ground, Mumbai',age:'Born 2007-2010',slots:18,total:120,fee:'Free'},
+{id:2,sport:'Cricket',color:'#F59E0B',icon:'🏏',title:'BCCI State Selection Camp — Maharashtra',org:'Maharashtra Cricket Assoc.',date:'05',month:'JUL',loc:'MCA Stadium, Pune',age:'U-16 / U-19 / U-23',slots:34,total:200,fee:'₹499'},
+{id:3,sport:'Athletics',color:'#EC4899',icon:'🏃',title:'National Sprint Trials — 100m / 200m',org:'Athletics Federation of India',date:'12',month:'JUL',loc:'JLN Stadium, New Delhi',age:'Open + Junior',slots:56,total:300,fee:'₹299'},
+{id:4,sport:'Football',color:'#22C55E',icon:'⚽',title:'ISL NextGen Scouting — Kerala',org:'ISL Scouting Network',date:'19',month:'JUL',loc:'Jawaharlal Nehru Stadium, Kochi',age:'U-17 / U-21',slots:22,total:80,fee:'Free'},
+];
+let appliedTrials=new Set();
+
+let posts=[
+{id:101,athleteId:1,time:'2h',sport:'Cricket',text:'89* off 54 against Australia A today! 💥 The hard work at 5 AM nets is paying off. Thank you Coach @coachvikram for believing in me. Next stop — the national camp! #MumbaiTrials2026',img:'https://images.unsplash.com/photo-1531415074968-036ba1b575da?q=80&w=1200&auto=format&fit=crop',likes:2841,comments:184,shares:96,views:'48K',liked:false,saved:false,type:'image'},
+{id:102,athleteId:2,time:'4h',sport:'Athletics',text:'NEW PERSONAL BEST! 11.38s in the 100m heats ⚡🏃‍♀️ Lane 4, headwind, still flew. Finals tomorrow — send your energy! #RoadToOlympics',img:'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1200&auto=format&fit=crop',likes:4210,comments:312,shares:208,views:'92K',liked:true,saved:false,type:'video',duration:'0:42'},
+{id:103,athleteId:3,time:'6h',sport:'Football',text:'Matchday brace + 1 assist 🎯⚽ Kerala Blasters U21 3-1 win! That second goal — left foot top bins. Highlights dropping tonight. Who was your Man of the Match?',img:'https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop',likes:1984,comments:156,shares:74,views:'31K',liked:false,saved:true,type:'poll',poll:[['Arjun (You) 🔥',58],['Midfielder Dev',27],['Goalkeeper Sana',15]],voted:false},
+{id:104,athleteId:5,time:'8h',sport:'Athletics',text:'COACH’S CORNER 🏃: Sprint speed = Stride Length × Stride Frequency. Most juniors only train one. This week’s drill: 6×60m flying sprints, full recovery. Save this, try it, tag me with your timings. Trials on 12 July — are you ready?',img:'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=1200&auto=format&fit=crop',likes:3120,comments:428,shares:512,views:'110K',liked:false,saved:false,type:'image'},
+{id:105,athleteId:4,time:'12h',sport:'Cricket',text:'5/18 today! 🎉 Swing, seam and a lot of patience. Grateful for every spell. Women’s cricket is rising and I want to be at the front of that pace attack. 💪',img:'',likes:1672,comments:98,shares:41,views:'22K',liked:false,saved:false,type:'text'},
+];
+
+function athleteById(id){return athletes.find(a=>a.id===id)||athletes[0]}
+function fmt(n){return n>=1000?(n/1000).toFixed(1).replace('.0','')+'K':n}
+function sportPill(s){const m={Cricket:'bg-amber-400/15 text-amber-500 border-amber-400/30',Football:'bg-green-400/15 text-green-500 border-green-400/30',Athletics:'bg-pink-400/15 text-pink-500 border-pink-400/30',General:'bg-sky-400/15 text-sky-500 border-sky-400/30'};return `<span class="text-[10px] font-extrabold px-2 py-1 rounded-full border ${m[s]||m.General}">${s.toUpperCase()}</span>`}
+
+/* STORIES */
+$('#stories').innerHTML=`<div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer" onclick="focusComposer()"><div class="relative"><img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-[62px] h-[62px] rounded-full object-cover"><span class="absolute bottom-0 right-0 w-5 h-5 bg-[#C8FF2E] text-black rounded-full grid place-items-center text-sm font-bold border-2 border-[var(--bg)]">+</span></div><span class="text-[11px] font-bold">Your Story</span></div>`+athletes.slice(1).map(a=>`<div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group" onclick="openProfile(${a.id})"><div class="story-ring group-hover:scale-105 transition"><img src="${a.avatar}" class="w-[58px] h-[58px] rounded-full object-cover border-2 border-[var(--bg)]"></div><span class="text-[11px] font-semibold muted max-w-[64px] truncate">${a.name.split(' ')[0]}</span></div>`).join('');
+
+/* ATHLETE CARDS */
+function renderAthletes(){
+ $('#athleteScroll').innerHTML=athletes.slice(1).map((a,i)=>`
+ <article class="athlete-card card rounded-[22px] overflow-hidden w-[248px] shrink-0 snap-start cursor-pointer">
+  <div class="relative h-[78px]"><img src="${a.cover}" class="w-full h-full object-cover"><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><span class="absolute top-2 right-2">${sportPill(a.sport)}</span></div>
+  <div class="p-4 pt-0 relative"><img src="${a.avatar}" onclick="event.stopPropagation();openProfile(${a.id})" class="w-14 h-14 rounded-2xl object-cover border-4 border-[var(--card)] -mt-7 relative z-10">
+   <div class="flex items-start justify-between mt-2"><div><h4 class="font-extrabold text-[15px] leading-tight">${a.name} ${a.verified?'<span class="text-sky-400 text-sm">✔</span>':''}</h4><p class="muted text-xs">${a.handle}</p></div></div>
+   <p class="text-xs font-bold mt-1.5">${a.pos}</p><p class="muted text-[11px]">📍 ${a.loc} • ${a.followers} followers</p>
+   <div class="grid grid-cols-4 gap-1 mt-3 text-center">${a.stats.map(s=>`<div class="card2 rounded-xl py-2"><p class="font-extrabold text-[13px] leading-none">${s[1]}</p><p class="muted text-[9px] font-bold mt-1 uppercase">${s[0]}</p></div>`).join('')}</div>
+   <div class="flex gap-2 mt-3"><button onclick="event.stopPropagation();toggleFollow(this,${a.id})" class="follow-btn flex-1 ${followed.has(a.handle.replace('@',''))?'card2 muted':'bg-[#C8FF2E] text-black'} text-xs font-extrabold py-2.5 rounded-full">${followed.has(a.handle.replace('@',''))?'Following':'＋ Follow'}</button><button onclick="event.stopPropagation();openProfile(${a.id})" class="flex-1 card2 text-xs font-extrabold py-2.5 rounded-full">View Profile</button></div>
+  </div></article>`).join('');
+ $('#suggestedList').innerHTML=athletes.slice(1,5).map(a=>`<div class="flex items-center gap-3"><img src="${a.avatar}" class="w-11 h-11 rounded-full object-cover cursor-pointer" onclick="openProfile(${a.id})"><div class="flex-1 min-w-0 cursor-pointer" onclick="openProfile(${a.id})"><p class="font-bold text-sm truncate">${a.name} ${a.verified?'<span class="text-sky-400">✔</span>':''}</p><p class="muted text-xs truncate">${a.sport} • ${a.pos}</p></div><button onclick="toggleFollow(this,${a.id})" class="follow-btn shrink-0 ${followed.has(a.handle.replace('@',''))?'card2 muted':'bg-[var(--text)] text-[var(--bg)]'} text-xs font-extrabold px-4 py-2 rounded-full">${followed.has(a.handle.replace('@',''))?'Following':'Follow'}</button></div>`).join('');
+}
+
+/* TRIALS */
+function trialCard(t,compact=false){
+ const applied=appliedTrials.has(t.id), pct=Math.round(((t.total-t.slots)/t.total)*100);
+ return `<div class="${compact?'card rounded-[20px] p-4':''} p-4 flex gap-3">
+  <div class="shrink-0 text-center"><div class="w-[54px] rounded-2xl py-2 text-white font-extrabold" style="background:${t.color}"><p class="text-lg leading-none">${t.date}</p><p class="text-[10px] tracking-widest">${t.month}</p></div><p class="text-[18px] mt-1">${t.icon}</p></div>
+  <div class="flex-1 min-w-0"><div class="flex gap-2 items-center flex-wrap"><span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full text-white" style="background:${t.color}">${t.sport.toUpperCase()}</span><span class="muted text-[11px] font-bold">${t.fee} Entry</span>${t.slots<25?'<span class="text-[10px] font-extrabold text-[#FF4D6D]">🔥 Filling Fast</span>':''}</div>
+  <h4 class="font-extrabold text-[14px] leading-snug mt-1.5">${t.title}</h4><p class="muted text-xs mt-0.5">${t.org}</p><p class="muted text-xs mt-1">📍 ${t.loc} • 🎂 ${t.age}</p>
+  <div class="mt-2.5"><div class="flex justify-between text-[11px] font-bold"><span class="muted">${t.total-t.slots} registered</span><span style="color:${t.color}">${t.slots} slots left</span></div><div class="h-1.5 bg-slate-500/20 rounded-full mt-1 overflow-hidden"><div class="h-full rounded-full" style="width:${pct}%;background:${t.color}"></div></div></div>
+  <button ${applied?'disabled':''} onclick="applyTrial(${t.id},this)" class="mt-3 w-full ${applied?'bg-green-500/15 text-green-500':'text-black font-extrabold'} text-xs font-bold py-2.5 rounded-full ${applied?'':'shine'}" style="${applied?'':'background:'+t.color}">${applied?'✓ Applied — See You There!':'Apply Now →'}</button></div></div>`;
+}
+function renderTrials(){$('#trialsList').innerHTML=trials.map(t=>trialCard(t)).join('');$('#mobileTrialsList').innerHTML=trials.map(t=>trialCard(t,true)).join('');}
+function applyTrial(id,btn){appliedTrials.add(id);const t=trials.find(x=>x.id===id);t.slots=Math.max(0,t.slots-1);renderTrials();showToast(`🎉 Applied! ${t.title} — confirmation sent to your inbox.`);}
+
+/* POSTS */
+function postHTML(p,i){
+ const a=athleteById(p.athleteId);
+ let media='';
+ if(p.type==='video'&&p.img) media=`<div class="relative rounded-[20px] overflow-hidden mt-3 group cursor-pointer" onclick="playVideo(this)"><img src="${p.img}" class="w-full h-[280px] object-cover group-hover:scale-[1.02] transition duration-500"><div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent"></div><div class="play-btn absolute inset-0 grid place-items-center"><span class="w-16 h-16 bg-[#C8FF2E] text-black rounded-full grid place-items-center text-2xl shadow-2xl">▶</span></div><span class="absolute bottom-3 left-3 bg-black/70 text-white text-[11px] font-bold px-2 py-1 rounded-full">🎥 HIGHLIGHT • ${p.duration}</span><span class="absolute bottom-3 right-3 bg-black/70 text-white text-[11px] font-bold px-2 py-1 rounded-full vid-time">${p.duration}</span><div class="absolute bottom-0 left-0 h-1 bg-[#C8FF2E] w-0 vid-bar"></div></div>`;
+ else if(p.img) media=`<img src="${p.img}" class="w-full h-[280px] object-cover rounded-[20px] mt-3 cursor-pointer hover:opacity-95 transition" onclick="showToast('🖼️ Opening full-screen highlight gallery...')">`;
+ let poll='';
+ if(p.type==='poll') poll=`<div class="mt-3 space-y-2">${p.poll.map((o,idx)=>`<button onclick="votePoll(${p.id},${idx},this)" class="poll-opt relative w-full text-left card2 rounded-2xl px-4 py-3 overflow-hidden text-sm font-bold"><span class="poll-bar absolute inset-y-0 left-0 bg-[#C8FF2E]/20" style="width:${p.voted?o[1]:0}%"></span><span class="relative flex justify-between"><span>${o[0]}</span><span class="poll-pct ${p.voted?'':'hidden'}">${o[1]}%</span></span></button>`).join('')}<p class="muted text-[11px] font-semibold poll-note">${p.voted?'✓ You voted • 2,847 votes':'2,847 votes • Tap to vote'}</p></div>`;
+ return `<article class="post card md:rounded-[24px] border-x-0 md:border-x p-4 md:p-5" style="animation-delay:${i*0.06}s">
+  <div class="flex gap-3"><img src="${a.avatar}" class="w-11 h-11 rounded-full object-cover cursor-pointer shrink-0" onclick="openProfile(${a.id})">
+   <div class="flex-1 min-w-0">
+    <div class="flex items-center gap-2 flex-wrap"><h4 class="font-extrabold text-[15px] cursor-pointer hover:underline" onclick="openProfile(${a.id})">${a.name} ${a.verified?'<span class="text-sky-400">✔</span>':''}</h4>${sportPill(p.sport)}<span class="muted text-xs">${a.handle} • ${p.time}</span><button class="ml-auto muted" onclick="showToast('📌 Post pinned options: Mute, Report, Copy Link')">•••</button></div>
+    <p class="text-[14.5px] leading-relaxed mt-1.5">${p.text}</p>${media}${poll}
+    <div class="flex items-center justify-between mt-4 max-w-[520px] text-[13px] font-bold muted">
+      <button onclick="toggleComments(${p.id})" class="flex items-center gap-1.5 hover:text-sky-400 transition">💬 <span id="cc-${p.id}">${fmt(p.comments)}</span></button>
+      <button onclick="sharePost(${p.id},this)" class="flex items-center gap-1.5 hover:text-green-400 transition">🔁 <span>${fmt(p.shares)}</span></button>
+      <button onclick="likePost(${p.id},this)" class="flex items-center gap-1.5 transition ${p.liked?'text-[#FF4D6D]':'hover:text-[#FF4D6D]'}"><span class="like-icon text-[16px]">${p.liked?'❤️':'🤍'}</span><span class="like-count">${fmt(p.likes)}</span></button>
+      <span class="hidden sm:flex items-center gap-1.5">👁️ ${p.views}</span>
+      <button onclick="savePost(${p.id},this)" class="${p.saved?'text-[#C8FF2E]':''} hover:text-[#C8FF2E] transition text-[15px]">${p.saved?'🔖':'📑'}</button>
+    </div>
+    <div id="comments-${p.id}" class="hidden mt-4 pt-3 border-t border-soft">
+      <div class="space-y-3 comment-list"><div class="flex gap-2.5"><img src="https://randomuser.me/api/portraits/women/12.jpg" class="w-8 h-8 rounded-full object-cover"><div class="card2 rounded-2xl rounded-tl-md px-3 py-2 flex-1"><p class="text-xs font-extrabold">Priya Nair <span class="muted font-semibold">@priya • 1h</span></p><p class="text-[13px] mt-0.5">Incredible performance! The whole academy is proud of you 🙌</p></div></div></div>
+      <div class="flex gap-2 mt-3"><img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full object-cover"><input onkeydown="if(event.key==='Enter')addComment(${p.id},this)" placeholder="Add your reply... Press Enter" class="flex-1 input-bg border border-soft rounded-full px-4 py-2 text-sm"></div>
+    </div>
+   </div></div></article>`;
+}
+function getFiltered(){
+ let list=[...posts];
+ if(bookmarkOnly) list=list.filter(p=>p.saved);
+ if(currentTab==='following') list=list.filter(p=>followed.has(athleteById(p.athleteId).handle.replace('@',''))||p.athleteId===0);
+ if(currentTab==='highlights') list=list.filter(p=>p.type==='video'||p.type==='poll'||p.img);
+ if(currentFilter!=='All') list=list.filter(p=>p.sport===currentFilter);
+ const q=($('#searchInput')?.value||'').toLowerCase().trim();
+ if(q) list=list.filter(p=>p.text.toLowerCase().includes(q)||p.sport.toLowerCase().includes(q)||athleteById(p.athleteId).name.toLowerCase().includes(q));
+ return list;
+}
+function renderPosts(){const list=getFiltered();$('#feed').innerHTML=list.map(postHTML).join('');$('#emptyState').classList.toggle('hidden',list.length>0);$('#feed').classList.toggle('hidden',list.length===0);}
+
+/* ACTIONS */
+function likePost(id,btn){const p=posts.find(x=>x.id===id);p.liked=!p.liked;p.likes+=p.liked?1:-1;btn.classList.toggle('text-[#FF4D6D]',p.liked);btn.querySelector('.like-icon').textContent=p.liked?'❤️':'🤍';btn.querySelector('.like-icon').classList.remove('pop');void btn.offsetWidth;btn.querySelector('.like-icon').classList.add('pop');btn.querySelector('.like-count').textContent=fmt(p.likes);if(p.liked)showToast('❤️ Liked! The athlete will be notified.');}
+function savePost(id,btn){const p=posts.find(x=>x.id===id);p.saved=!p.saved;btn.textContent=p.saved?'🔖':'📑';btn.classList.toggle('text-[#C8FF2E]',p.saved);showToast(p.saved?'🔖 Saved to Bookmarks':'Removed from Bookmarks');if(bookmarkOnly)renderPosts();}
+function sharePost(id,btn){const p=posts.find(x=>x.id===id);p.shares++;btn.querySelector('span:last-child').textContent=fmt(p.shares);showToast('🔁 Reposted to your timeline! Link copied.');}
+function toggleComments(id){$('#comments-'+id).classList.toggle('hidden');const inp=$('#comments-'+id+' input');if(inp)inp.focus();}
+function addComment(id,inp){if(!inp.value.trim())return;const p=posts.find(x=>x.id===id);p.comments++;$('#cc-'+id).textContent=fmt(p.comments);const list=inp.closest('[id^=comments]').querySelector('.comment-list');list.insertAdjacentHTML('beforeend',`<div class="flex gap-2.5"><img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full object-cover"><div class="card2 rounded-2xl rounded-tl-md px-3 py-2 flex-1"><p class="text-xs font-extrabold">Rohan Sharma <span class="muted font-semibold">@rohan.cricket • now</span></p><p class="text-[13px] mt-0.5">${inp.value.replace(/</g,'&lt;')}</p></div></div>`);inp.value='';showToast('💬 Reply posted!');}
+function votePoll(id,idx,btn){const p=posts.find(x=>x.id===id);if(p.voted)return;p.voted=true;p.poll=p.poll.map((o,i)=>[o[0],Math.max(5,o[1]+(i===idx?6:-2))]);renderPosts();showToast('🗳️ Vote counted! Results updated live.');}
+function playVideo(el){const btn=el.querySelector('.play-btn'),bar=el.querySelector('.vid-bar');if(btn.style.display==='none'){btn.style.display='grid';bar.classList.remove('video-progress');bar.style.width='0'}else{btn.style.display='none';bar.classList.add('video-progress');showToast('🎥 Playing highlight in HD... Tap again to pause.');}}
+function toggleFollow(btn,id){const a=athleteById(id),key=a.handle.replace('@','');const now=!followed.has(key);now?followed.add(key):followed.delete(key);renderAthletes();showToast(now?`✅ Following ${a.name} — updates in your Following feed`:`Unfollowed ${a.name}`);if(currentTab==='following')renderPosts();}
+
+/* COMPOSER */
+const postText=$('#postText'), postBtn=$('#postBtn');
+postText.addEventListener('input',()=>{const len=postText.value.length;$('#charCount').textContent=280-len;$('#charCount').style.color=len>260?'#FF4D6D':'';$('#charRing').style.background=`conic-gradient(#C8FF2E ${len/280*100}%, transparent ${len/280*100}%)`;postBtn.disabled=!postText.value.trim();});
+$$('.c-sport').forEach(b=>b.onclick=()=>{selectedSport=b.dataset.sport;$$('.c-sport').forEach(x=>{x.classList.remove('active');x.classList.add('muted')});b.classList.add('active');b.classList.remove('muted');});
+function attachImage(){attached=true;$('#attachImg').src='https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop';$('#attachPreview').classList.remove('hidden');showToast('🖼️ Highlight image attached');}
+function removeAttach(){attached=false;$('#attachPreview').classList.add('hidden');}
+function focusComposer(){window.scrollTo({top:0,behavior:'smooth'});setTimeout(()=>postText.focus(),350);}
+function createPost(){if(!postText.value.trim())return;posts.unshift({id:Date.now(),athleteId:0,time:'Just now',sport:selectedSport,text:postText.value.replace(/</g,'&lt;'),img:attached?$('#attachImg').src:'',likes:0,comments:0,shares:0,views:'12',liked:false,saved:false,type:attached?'image':'text'});postText.value='';postBtn.disabled=true;$('#charCount').textContent='280';removeAttach();bookmarkOnly=false;renderPosts();window.scrollTo({top:document.getElementById('feedTop').offsetTop-120,behavior:'smooth'});showToast('🚀 Posted! Your update is live on KHELORA.');}
+
+/* FILTERS / TABS / SEARCH */
+$$('.f-chip').forEach(b=>b.onclick=()=>{currentFilter=b.dataset.filter;bookmarkOnly=false;$$('.f-chip').forEach(x=>{x.classList.remove('active');x.classList.add('muted')});b.classList.add('active');b.classList.remove('muted');renderPosts();});
+function setTab(tab){currentTab=tab;bookmarkOnly=false;['foryou','following','highlights'].forEach(t=>{const el=$('#tab'+t.charAt(0).toUpperCase()+t.slice(1));if(el){el.className='px-4 py-2 rounded-full '+(t===tab?'bg-[#C8FF2E] text-black':'muted')}});renderPosts();showToast(tab==='following'?'👥 Showing athletes you follow':tab==='highlights'?'🎥 Showing top highlights & polls':'🔥 Personalised feed refreshed');}
+function filterBookmarks(){bookmarkOnly=true;currentFilter='All';renderPosts();document.getElementById('feedTop').scrollIntoView({behavior:'smooth'});showToast('🔖 Showing your saved posts');}
+function resetFilters(){currentFilter='All';bookmarkOnly=false;$('#searchInput').value='';$$('.f-chip').forEach((x,i)=>{x.classList.toggle('active',i===0);x.classList.toggle('muted',i!==0)});renderPosts();}
+function quickSearch(q){$('#searchInput').value=q;renderPosts();window.scrollTo({top:400,behavior:'smooth'});}
+$('#searchInput').addEventListener('input',renderPosts);
+$('#searchMobile').addEventListener('input',e=>{if($('#searchInput')){$('#searchInput').value=e.target.value;renderPosts();}});
+
+/* PROFILE MODAL */
+function openProfile(id){
+ const a=athleteById(id), isFollowing=followed.has(a.handle.replace('@',''));
+ $('#profileCard').innerHTML=`<div class="relative h-[150px]"><img src="${a.cover}" class="w-full h-full object-cover"><button onclick="closeProfile()" class="absolute top-3 right-3 bg-black/60 text-white w-8 h-8 rounded-full">✕</button><span class="absolute bottom-3 right-3">${sportPill(a.sport)}</span></div>
+ <div class="p-5 pt-0"><div class="flex justify-between items-end -mt-10 relative z-10"><img src="${a.avatar}" class="w-20 h-20 rounded-[22px] object-cover border-4 border-[var(--card)]"><div class="flex gap-2 pb-1"><button onclick="showToast('💬 Opening chat with ${a.name}...')" class="card2 w-10 h-10 rounded-full grid place-items-center">✉️</button><button onclick="toggleFollow(this,${a.id});openProfile(${a.id})" class="${isFollowing?'card2 muted':'bg-[#C8FF2E] text-black'} text-xs font-extrabold px-5 py-2.5 rounded-full">${isFollowing?'Following':'＋ Follow'}</button></div></div>
+ <h3 class="font-syne font-extrabold text-2xl mt-3">${a.name} ${a.verified?'<span class="text-sky-400 text-lg">✔</span>':''}</h3><p class="muted text-sm">${a.handle} • ${a.pos}</p><p class="text-sm leading-relaxed mt-3">${a.bio}</p><p class="muted text-xs mt-2 font-semibold">📍 ${a.loc} • 🏅 Verified ${a.sport} Athlete • Joined 2023</p>
+ <div class="flex gap-5 mt-3 text-sm"><span><b>${a.followers}</b> <span class="muted">Followers</span></span><span><b>${Math.floor(Math.random()*400+120)}</b> <span class="muted">Following</span></span><span><b>${Math.floor(Math.random()*90+24)}</b> <span class="muted">Posts</span></span></div>
+ <div class="grid grid-cols-4 gap-2 mt-4 text-center">${a.stats.map(s=>`<div class="card2 rounded-2xl py-3"><p class="font-syne font-extrabold text-lg leading-none">${s[1]}</p><p class="muted text-[9px] font-extrabold mt-1.5 uppercase tracking-wide">${s[0]}</p></div>`).join('')}</div>
+ <div class="grid grid-cols-3 gap-2 mt-4 text-center text-xs font-bold"><div class="rounded-2xl bg-[#C8FF2E]/15 text-[#8FCC00] py-3">🔥 Form<br><span class="text-base">Excellent</span></div><div class="rounded-2xl bg-violet-500/15 text-violet-400 py-3">Scout Score<br><span class="text-base">${88+ (a.id%10)}/100</span></div><div class="rounded-2xl bg-teal-400/15 text-teal-500 py-3">Availability<br><span class="text-base">Open</span></div></div>
+ <button onclick="showToast('📩 Trial invite sent! ${a.name} will review your profile.')" class="mt-4 w-full grad-bg text-black font-extrabold py-3.5 rounded-full shine">Invite to Trial / Tournament →</button></div>`;
+ const m=$('#profileModal');m.classList.remove('hidden');m.classList.add('flex');requestAnimationFrame(()=>{$('#profileCard').style.transform='scale(1)';$('#profileCard').style.opacity='1';});
+}
+function closeProfile(){const m=$('#profileModal');$('#profileCard').style.transform='scale(.95)';$('#profileCard').style.opacity='0';setTimeout(()=>{m.classList.add('hidden');m.classList.remove('flex')},200);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeProfile();closeTrialsDrawer();}});
+
+/* DRAWER */
+function openTrialsDrawer(){$('#trialsDrawer').classList.remove('hidden');requestAnimationFrame(()=>$('#drawerPanel').style.transform='translateY(0)');}
+function closeTrialsDrawer(){const d=$('#trialsDrawer');if(d.classList.contains('hidden'))return;$('#drawerPanel').style.transform='translateY(100%)';setTimeout(()=>d.classList.add('hidden'),320);}
+
+/* LOAD MORE */
+let extraCount=0;
+function loadMore(){extraCount++;const extras=[
+ {id:Date.now()+1,athleteId:3,time:'1d',sport:'Football',text:'Training diaries ⚽📹 300 passes, 50 shots, zero excuses. Road to ISL starts in these empty stadiums at 6 AM.',img:'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1200&auto=format&fit=crop',likes:892,comments:64,shares:22,views:'15K',liked:false,saved:false,type:'video',duration:'1:18'},
+ {id:Date.now()+2,athleteId:2,time:'1d',sport:'Athletics',text:'Recovery day 🧊 Ice bath + mobility + video analysis. Champions are made on rest days too. #RoadToOlympics',img:'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?q=80&w=1200&auto=format&fit=crop',likes:1240,comments:88,shares:35,views:'19K',liked:false,saved:false,type:'image'}];
+ posts.push(...extras);renderPosts();showToast('✨ 2 new highlights loaded');}
+
+/* THEME */
+function toggleTheme(){const html=document.documentElement;const isDark=html.getAttribute('data-theme')==='dark';html.setAttribute('data-theme',isDark?'light':'dark');$$('.theme-icon').forEach(e=>e.textContent=isDark?'🌙':'☀️');$$('.theme-label').forEach(e=>e.textContent=isDark?'Dark Mode':'Light Mode');showToast(isDark?'☀️ Light Mode ON — fresh & clean':'🌙 Dark Mode ON — sleek game night vibes');}
+
+/* TOAST */
+function showToast(msg){const t=document.createElement('div');t.className='toast card rounded-2xl px-4 py-3 text-sm font-bold shadow-2xl flex items-center gap-2';t.innerHTML=`<span class="w-2 h-2 rounded-full bg-[#C8FF2E] shrink-0"></span><span>${msg}</span>`;$('#toasts').appendChild(t);setTimeout(()=>{t.style.transition='.3s';t.style.opacity='0';t.style.transform='translateY(8px)';setTimeout(()=>t.remove(),300)},3200);}
+
+/* INIT */
+renderAthletes();renderTrials();renderPosts();
+setTimeout(()=>showToast('👋 Welcome to KHELORA! 12 trials are open near Mumbai.'),700);
+</script>
+</body>
+</html>
